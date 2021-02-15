@@ -11,11 +11,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -96,11 +94,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
     private void setMarker(LatLng latLng) {
+        if (markers.size() == POLY_SIDE)
+            crMap();
         MarkerOptions options = new MarkerOptions().position(latLng)
                 .title(str[markers.size()])
                 .draggable(true);
-        if (markers.size() == POLY_SIDE)
-            crMap();
+
 
         markers.add(naiMap.addMarker(options));
         if (markers.size() == POLY_SIDE)
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void drawShape() {
         PolygonOptions options = new PolygonOptions()
                 .fillColor(0x3300FF00)
-                .strokeColor(Color.BLUE)
+                .strokeColor(Color.RED)
                 .strokeWidth(5);
 
         for (int i = 0; i< POLY_SIDE; i++) {
